@@ -82,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_game'])) {
 }
 if (isset($_GET['delete_game'])) {
     $gid = (int)$_GET['delete_game'];
+    $bdd->prepare("DELETE FROM tournaments WHERE game_id = ?")->execute([$gid]);
     $bdd->prepare("DELETE FROM games WHERE id = ?")->execute([$gid]);
     header("Location: Admin-panel.php?page={$page}&page_tournoi={$pageTournoi}");
     exit;
